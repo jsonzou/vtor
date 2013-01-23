@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> vtor demo </title>
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <script src='js/jquery.js'> </script>
+  <script src='../lib/vtor.lib.js'> </script>
+  <script src='../jquery.vtor.js'> </script>
+  <link rel='stylesheet' type='text/css' href='../css/vtor.css' />
+  <script>
+      $(function(){
+	      $vtor.init(['vtor.vtor'],'model1');
+           $("#b").click(function(){
+				$vtor.validate();
+		   });
+	  })
+  </script>
+ </head>
+
+ <body>
+  email:<input type='text' id='iemail' value=''/><br>
+  lenth:<input type='text' id='ilen' value=''/><br> 
+  region:<input type='text' id='iregion' value=''/> <br>
+  float:<input type='text' id='ifloat' value=''/><br>
+   compare:<input type='text' id='icompare' value=''/><br>
+ pint:<input type='text' id='ipint' value=''/><br>
+chinese:<input type='text' id='ichinese' value=''/><br>
+  <input type='button' id='b' value='submit'/>
+ </body>
+</html>

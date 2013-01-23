@@ -1,0 +1,20 @@
+@model1
+/*
+#iemail
+--email()::邮箱格式不正确
+#ilen
+--len(2)::只能是两个字符
+#iregion
+--region(3)::只能填写3的数字
+
+#icompare
+--compare(<,4)::小于3
+--region(2,3)::2~3之间
+ #ichinese
+ --chinese()::输入中文
+
+#ifloat
+--float(2)::两位小数
+*/
+ #ipint
+--p_int()::正整数
