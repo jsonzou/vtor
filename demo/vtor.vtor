@@ -24,4 +24,4 @@
 --numeric::只能输入数字类型
 */
 #iajax
---ajax(j.json)::ajax验证失败
+--ajax(demo.json)::ajax验证失败
