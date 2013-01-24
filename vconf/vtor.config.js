@@ -22,7 +22,7 @@ $vtor.cfg=function(config){
 	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  */
       config.vtor={
-	   msg_type:'multiple'
+	   //msg_type:'multiple'
 	  };
 
 	  /*

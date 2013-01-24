@@ -26,13 +26,13 @@
 --region(2,3)::2~3之间
 //验证正整数
 #pint
---notNull()::<span style='color:red;'>*</span>必填
+--notNull::<span style='color:red;'>*</span>必填
 --p_int()::正整数
 //验证中文
 #chinese
---notNull()::<span style='color:red;'>*</span>必填
+--notNull::<span style='color:red;'>*</span>必填
  --chinese()::输入中文
  //ajax验证
 #ajax
---notNull()::<span style='color:red;'>*</span>必填
+--notNull::<span style='color:red;'>*</span>必填
 --ajax(demo.json)::ajax验证失败
