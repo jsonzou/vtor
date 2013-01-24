@@ -159,7 +159,15 @@
 	   验证邮政编码
 	   @id=DOM id
 	  */
-	 
+
+	 /*
+           ajax(url)
+	   ajax验证
+	   @return {resoult:true[false]}
+	   @id=DOM id
+	   @param(url)
+	  */
+
 	 /*
 	   ok()
 	   验证永远ok
