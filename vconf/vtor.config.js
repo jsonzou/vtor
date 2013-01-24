@@ -3,7 +3,7 @@
  * @author JsonZou, 2012-2012
  * @source 基于VVC思想的解耦合页面验证js框架【用户自定义配置】
  * @license MIT License <https://github.com/jsonzou/vtor>
- * 自定义使用方法请参照：api/使用说明.docx
+ * 自定义使用方法请参照：api/instructions.docx
  */
 $vtor.cfg=function(config){
 	/*
@@ -17,6 +17,9 @@ $vtor.cfg=function(config){
 	  * param_end 配置文件验证参数结束字符；默认 )
 	  * param_split 配置文件验证参数分隔符；默认 ,
 	  * msg_type 提示类型:single只提示最靠前的一个错误验证；multiple提示全部错误验证；默认 single
+	  * msg_class 提示框的样式； 默认vtor-input-err-msg
+	  * errInput_class 输入框错误的样式；默认 vtor-input-err-border
+	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  */
       config.vtor={
 	  // msg_type:'single'
