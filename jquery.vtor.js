@@ -45,8 +45,8 @@
 		  //初始化验证模块 
 		   $vtor.view=view;
 
-		   //alert($vtor.vtorStr) 
-			//alert(JSON.stringify($vtor.vtorObject)) 
+		    alert($vtor.vtorStr) 
+			alert(JSON.stringify($vtor.vtorObject)) 
 		   },
       //配置文件字符串
       vtorStr:'',
@@ -126,8 +126,7 @@
 
 		},
 	    clearAnnotation:function(str){
-			 return str.replace(/\*[^*]*\*+(?:[^\/*][^*]*\*+)*/g,'').replace(/\/\/[^\r\n]*/g ,'');
-			 
+			 return str.replace(/\/\*(\s|.)*?\*\//g,'').replace(/\/\/[^\r\n]*/g ,'');
 		  },
 		trim : function(str) { 
 				return str.replace(/(^\s*)|(\s*$)/g, ""); 
@@ -266,13 +265,15 @@
 					    type: "get",
 					    url: path,
 					    async:false,
+					    dataType:'text',
 					    success: function(data, textStatus){
 						$vtor.vtorStr+=data;
 				        } 
 			        });
-			    
+			      
 				  $vtor.vtorStr=$vtor.util.clearAnnotation($vtor.vtorStr);
-			   
+				 
+			    alert( $vtor.vtorStr)
 			  }
 		  }
 	   }

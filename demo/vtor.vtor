@@ -1,20 +1,38 @@
+/*
+ 验证页面模块model1
+*/
 @model1
-
+//验证email
 #email
+--notNull()::<span style='color:red;'>*</span>必填
 --email()::邮箱格式不正确
 --contain(163.com)::请填入163邮箱地址
+//验证长度
 #len
+--notNull()::<span style='color:red;'>*</span>必填
 --len(2)::只能是两个字符
+//验证数字区间
 #region
+--notNull()::<span style='color:red;'>*</span>必填
 --region(3)::只能填写3的数字
+//验证浮点型
 #float
+--notNull()::<span style='color:red;'>*</span>必填
 --float(2)::两位小数
+//验证比较结果
 #compare
+--notNull()::<span style='color:red;'>*</span>必填
 --compare(<,4)::填写小于4的数字
 --region(2,3)::2~3之间
+//验证正整数
 #pint
+--notNull()::<span style='color:red;'>*</span>必填
 --p_int()::正整数
+//验证中文
 #chinese
+--notNull()::<span style='color:red;'>*</span>必填
  --chinese()::输入中文
+ //ajax验证
 #ajax
+--notNull()::<span style='color:red;'>*</span>必填
 --ajax(demo.json)::ajax验证失败
