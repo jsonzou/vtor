@@ -1,5 +1,5 @@
 @model1
-/*
+
 #iemail
 --email()::邮箱格式不正确
 --contain(163.com)::请填入163邮箱地址
@@ -19,6 +19,6 @@
 
 #ipint
 --p_int()::正整数
-*/
+
 #iajax
 --ajax(demo.json)::ajax验证失败
