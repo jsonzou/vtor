@@ -12,7 +12,7 @@
 	  */
     
 	  /*
-	   empty()
+	   notNull()
 	   验证是否为空
 	   @id=DOM id
 	  */
