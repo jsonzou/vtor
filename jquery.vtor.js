@@ -190,12 +190,14 @@
 							     
 							  }else{
 								$('.'+$vtor.config.errInput_class).removeClass($vtor.config.errInput_class);
+								$('.'+$vtor.config.msg_class).hide();
 							   $vtor.core.show(id,validateTerms[validateTerm].msg);
 						       return resoult;
 							  }
 						    }else{
 							 
 							  $("#"+id).removeClass($vtor.config.errInput_class);
+							  $('.'+$vtor.config.msg_class).hide();
 							}
 					    
 						 }
