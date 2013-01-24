@@ -14,7 +14,7 @@
 	     $vtor.init(path,view);
 	  },
 	  $v:function(){
-	     $vtor.validate();
+	    return $vtor.validate();
 	  },
 	  $id:function(id){
 		  return $vtor.util.getValById(id);
