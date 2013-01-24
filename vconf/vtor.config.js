@@ -7,7 +7,7 @@
 $vtor.cfg=function(config){
 	/*
 	  ***用户自定义配置验证文件的组织格式***
-      * func_pre 验证函数前缀；默认 func_
+      * func_pre 验证函数前缀；默认 func
 	  * view_pre 配置文件模块前缀；默认 @
 	  * id_pre 配置文件DOM id前缀；默认 #
 	  * validateTerm_pre 配置文件验语句前缀；默认 --

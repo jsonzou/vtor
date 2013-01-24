@@ -67,7 +67,7 @@
 	  * msg_type 提示类型：single只提示最靠前的一个错误验证；multiple提示全部错误验证
 	  */
 	 config:{
-	     func_pre:'func_',
+	     func_pre:'func',
 		 view_pre:'@',
 		 id_pre:'#',
          validateTerm_pre:'--',
@@ -87,6 +87,7 @@
 	  * msg_type_multy提示全部错误验证
 	  */
 	constant:{
+		func_middle:'_',
 	    msg_html:"<span>&nbsp;</span>",
 		msg_type_single:'single',
 		msg_type_multiple:'multiple'
@@ -163,12 +164,13 @@
 		  
 		  show:function(id,msg){
 			  var _ido=$("#"+id);
+			  if(_ido&&_ido.length>0){
 			  _ido.addClass($vtor.config.errInput_class);
 			  var _msgo= _ido.next('span.'+$vtor.config.msg_class);
 			 
 			  _msgo.html(msg);
 		      _msgo.show(500);
-
+              }
 		  },
 		  dovalidate:function(view){
 		            var resoult=true;
@@ -177,7 +179,7 @@
 					  for(id in ids){
                          var validateTerms=ids[id];
                          for(validateTerm in validateTerms){
-						    var  _resoult=$vtor_func[$vtor.config.func_pre+validateTerm.toLowerCase()](id,validateTerms[validateTerm].param);
+						    var  _resoult=$vtor_func[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](id,validateTerms[validateTerm].param);
 							if(!_resoult){
 								resoult=resoult&&_resoult;
 							  if($vtor.config.msg_type==$vtor.constant.msg_type_multiple){
@@ -196,6 +198,7 @@
 						 }
 					  }
 					 }
+					 
 					 return resoult;
 			 
 			 
@@ -233,6 +236,7 @@
 							  //提示语句div
 							  var _msgo=$($vtor.constant.msg_html);
 							  var _ido= $("#"+$vtor.util.trim(validateTerms[0]));
+							  if(_ido&&_ido.length>0){
 							  _ido.after(_msgo);
 							  _msgo.addClass($vtor.config.msg_class);
 							  _msgo.css('left',_ido.offset().left+_ido.width())
@@ -242,6 +246,7 @@
 								 
 									  });
 							  ids[$vtor.util.trim(validateTerms[0])]=rules;
+							  }
 					   }
 				   }
 				  $vtor.vtorObject[$vtor.util.trim(validates[0])]=ids;

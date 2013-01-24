@@ -13,21 +13,16 @@
       $(function(){
 	      $vtor.$('vtor.vtor',['model1']);
            $("#b").click(function(){
-				$vtor.$v();
+				var r=$vtor.$v();
+				//alert(r)
 		   });
 	  })
   </script>
  </head>
 
  <body>
-  email:<input type='text' id='iemail' value=''/><br>
-  lenth:<input type='text' id='ilen' value=''/><br> 
-  region:<input type='text' id='iregion' value=''/> <br>
-  float:<input type='text' id='ifloat' value=''/><br>
-   compare:<input type='text' id='icompare' value=''/><br>
- pint:<input type='text' id='ipint' value=''/><br>
-chinese:<input type='text' id='ichinese' value=''/><br>
-数字:<input type='text' id='inum' value=''/><br>
+ 电子邮箱地址:<input type='text' id='iemail' value=''/><br>
+ 
   <input type='button' id='b' value='submit'/>
  </body>
 </html>

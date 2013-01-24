@@ -2,6 +2,7 @@
 
 #iemail
 --email()::邮箱格式不正确
+--contain(163.com)::请填入163邮箱地址
 #ilen
 --len(2)::只能是两个字符
 #iregion
