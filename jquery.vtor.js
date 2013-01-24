@@ -16,7 +16,7 @@
 	  $v:function(){
 	     $vtor.validate();
 	  },
-	 $id:function(id){
+	  $id:function(id){
 		  return $vtor.util.getValById(id);
 	  },
       init:function(path,view){
@@ -32,7 +32,7 @@
 		 if(config.vtor){
 			  $.extend($vtor.config,config.vtor);
 		 }
-		 //重置用户验证文件格式
+		 //加入用户自定义验证函数库
 		 if(config.funcs){
 			  $.extend($vtor_func,config.funcs);
 		 }
