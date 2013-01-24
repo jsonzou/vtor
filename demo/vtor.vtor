@@ -19,9 +19,6 @@
 
 #ipint
 --p_int()::正整数
-
-#inum
---numeric::只能输入数字类型
 */
 #iajax
 --ajax(demo.json)::ajax验证失败
