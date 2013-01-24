@@ -3,6 +3,7 @@
  * @author JsonZou, 2012-2012
  * @source 基于VVC思想的解耦合页面验证js框架【用户自定义配置】
  * @license MIT License <https://github.com/jsonzou/vtor>
+ * 自定义使用方法请参照：api/使用说明.docx
  */
 $vtor.cfg=function(config){
 	/*
@@ -18,7 +19,7 @@ $vtor.cfg=function(config){
 	  * msg_type 提示类型:single只提示最靠前的一个错误验证；multiple提示全部错误验证；默认 single
 	  */
       config.vtor={
-	   msg_type:'single'
+	  // msg_type:'single'
 	  };
 
 	  /*
@@ -28,7 +29,7 @@ $vtor.cfg=function(config){
 
 	  config.funcs={
        //只能输入数字
-	   func_numeric:function(id){var val=$vtor.$id(id);return /^\d+$/.test(val);}
+	   //func_numeric:function(id){var val=$vtor.$id(id);return /^\d+$/.test(val);}
 	   /*
 	   * 若要在配置文件中调用此函数只需配置：
 	   * --numeric()::只能输入数字
