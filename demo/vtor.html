@@ -5,15 +5,15 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <script src='js/jquery.js'> </script>
-  <script src='../lib/vtor.lib.js'> </script>
-  <script src='../jquery.vtor.js'> </script>
-  <link rel='stylesheet' type='text/css' href='../css/vtor.css' />
+   <script src='js/jquery.js'> </script>
+   <script src='js/json.js'> </script>
+   <script src='../jquery.vtor.js'> </script>
+  
   <script>
       $(function(){
-	      $vtor.init(['vtor.vtor'],'model1');
+	      $vtor.$('vtor.vtor',['model1']);
            $("#b").click(function(){
-				$vtor.validate();
+				$vtor.$v();
 		   });
 	  })
   </script>
@@ -27,6 +27,7 @@
    compare:<input type='text' id='icompare' value=''/><br>
  pint:<input type='text' id='ipint' value=''/><br>
 chinese:<input type='text' id='ichinese' value=''/><br>
+Êý×Ö:<input type='text' id='inum' value=''/><br>
   <input type='button' id='b' value='submit'/>
  </body>
 </html>

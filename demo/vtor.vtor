@@ -1,5 +1,5 @@
 @model1
-/*
+
 #iemail
 --email()::邮箱格式不正确
 #ilen
@@ -15,6 +15,9 @@
 
 #ifloat
 --float(2)::两位小数
-*/
- #ipint
+
+#ipint
 --p_int()::正整数
+
+#inum
+--numeric::只能输入数字类型
