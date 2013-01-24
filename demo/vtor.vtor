@@ -10,7 +10,7 @@
 #float
 --float(2)::两位小数
 #compare
---compare(<,4)::小于3
+--compare(<,4)::填写小于4的数字
 --region(2,3)::2~3之间
 #pint
 --p_int()::正整数
