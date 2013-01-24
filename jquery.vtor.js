@@ -65,6 +65,9 @@
 	  * param_end 配置文件验证参数结束字符
 	  * param_split 配置文件验证参数分隔符
 	  * msg_type 提示类型：single只提示最靠前的一个错误验证；multiple提示全部错误验证
+	  * msg_class 提示框的样式
+	  * errInput_class 输入框错误的样式
+	  * vtor_suf 验证文件扩展名配置
 	  */
 	 config:{
 	     func_pre:'func',
