@@ -5,6 +5,6 @@ Vtor 验证库包含了25种以上的常用验证，email,url,phone,mobile,ajax等等。用户可以自
 强烈建议童鞋们先阅读api/instructions.docx
 具体的用法和接口请访问api文件夹下的相关介绍。
 实例请参考demo文件夹下相关实践。
-有童鞋不懂或者想了解更多的请联系我：
-  QQ:1009616001
-  EMAIL:keko-boy@163.com
+QQ交流群:291631859
+希望童鞋们多提bug和意见。我们一起见证vtor的成长。
+  
