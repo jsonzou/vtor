@@ -5,7 +5,7 @@
  * @license MIT License <https://github.com/jsonzou/vtor>
  * 自定义使用方法请参照：api/instructions.docx
  */
-$vtor.cfg=function(config){
+$vtor.custom=function(custom){
 	/*
 	  ***用户自定义配置验证文件的组织格式***
       * func_pre 验证函数前缀；默认 func
@@ -21,8 +21,9 @@ $vtor.cfg=function(config){
 	  * errInput_class 输入框错误的样式；默认 vtor-input-err-border
 	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  */
-      config.vtor={
+      custom.vtor={
 	   //msg_type:'multiple'
+	   //vtor_suf:'txt'
 	  };
 
 	  /*
@@ -30,7 +31,7 @@ $vtor.cfg=function(config){
       *函数格式=验证函数前缀[默认func_]+函数功能名称[function Name]:function(DOM ID[,其他参数]){[方法体]}
 	  */
 
-	  config.funcs={
+	  custom.funcs={
        //只能输入数字
 	   //func_numeric:function(id){var val=$vtor.$id(id);return /^\d+$/.test(val);}
 	   /*
@@ -39,4 +40,4 @@ $vtor.cfg=function(config){
 	   */
 	 };
 
-}
+};
