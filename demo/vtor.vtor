@@ -6,7 +6,7 @@
 #email
 --notNull()::<span style='color:red;'>*</span>必填
 --email()::邮箱格式不正确
---contain(163.com)::请填入163邮箱地址
+--contain(163.com,i)::请填入163邮箱地址
 //验证长度
 #len
 --notNull()::<span style='color:red;'>*</span>必填

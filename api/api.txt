@@ -80,7 +80,7 @@
 
 	/*
 	   contain(string)
-	   验证是否包含某个任意字符
+	   验证是否包含某个任意字符param[0]要包含的字符,param[1]=i不区分大小写
 	   @id=DOM id
 	   @param=(string)
 	  */

@@ -395,7 +395,7 @@
 		  return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'[a-zA-Z_0-9]+' ) 
 		};
 	/*
-	   验证是否包含某个任意字符
+	   验证是否包含某个任意字符param[0]要包含的字符,param[1]=i不区分大小写
 	   @id=DOM id
 	   @param=(string)
 	  */
@@ -403,6 +403,11 @@
 		   var _value= $vtor.$id(id);
 		    if(_value.length==0){
 				return true;
+			}
+			//不区分大小写
+			if(param&&param.length==2){
+			  _value=_value.toLowerCase();
+			  param[0]=param[0].toLowerCase();
 			}
 		   if(param&&_value.indexOf(param[0])!=-1){
 		      return true;
@@ -413,7 +418,7 @@
 		   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^((1[1-5])|(2[1-3])|(3[1-7])|(4[1-6])|(5[0-4])|(6[1-5])|71|(8[12])|91)\d{4}((19\\d{2}(0[13-9]|1[012])(0[1-9]|[12]\d\|30))|(19\\d{2}(0[13578]|1[02])31)|(19\\d{2}02(0[1-9]|1\\d|2[0-8]))|(19([13579][26]|[2468][048]|0[48])0229))\\d{3}(\\d|X|x)?$');
 	   };
 	/*
-	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值
+	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值;
 	   @id=DOM id
 	   @param=(operator,value)
 	  */
