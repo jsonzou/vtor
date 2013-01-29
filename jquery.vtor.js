@@ -162,9 +162,11 @@
 					for(v in view){
 					   var ids=$vtor.vtorObject[view[v]];
 					  for(id in ids){
+						 var id_resoult=true;  
                          var validateTerms=ids[id];
                          for(validateTerm in validateTerms){
 						    var  _resoult=$vtor.lib.funcs[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](id,validateTerms[validateTerm].param);
+                            id_resoult=id_resoult&&_resoult;
 							if(!_resoult){
 								resoult=resoult&&_resoult;
 							  if($vtor.config.msg_type==$vtor.constant.msg_type_multiple){
@@ -173,12 +175,13 @@
 							  }else{
 								$('.'+$vtor.config.errInput_class).removeClass($vtor.config.errInput_class);
 								$('.'+$vtor.config.msg_class).hide();
-							   $vtor.core.show(id,validateTerms[validateTerm].msg);
-						       return resoult;
+							    $vtor.core.show(id,validateTerms[validateTerm].msg);
+						        return resoult;
 							  }
-						    }else{
-							 
-						
+						    }else{ 
+							  if(id_resoult){
+							   $('#'+id).removeClass($vtor.config.errInput_class);
+							  }
 							  $('.'+$vtor.config.msg_class).hide();
 							}
 					    
@@ -245,7 +248,7 @@
 			  if($vtor.util.checkVtorPth(path)){
 			     
                     $.ajax({
-					    type: "get",
+					    type: "post",
 					    url: path,
 					    async:false,
 					    dataType:'text',
