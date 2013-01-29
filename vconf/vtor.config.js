@@ -28,7 +28,7 @@ $vtor.custom=function(custom){
 
 	  /*
 	  ***用户扩充或覆盖验证库***
-      *函数格式=验证函数前缀[默认func_]+函数功能名称[function Name]:function(DOM ID[,其他参数]){[方法体]}
+      *函数格式=验证函数前缀[默认func]+下划线+函数功能名称[function Name]:function(DOM ID[,其他参数]){[方法体]}
 	  */
 
 	  custom.funcs={
