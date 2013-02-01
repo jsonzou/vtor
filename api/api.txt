@@ -30,8 +30,15 @@
 	   @id=DOM id
 	  */
 	 
+           /*
+           date(param)
+	   日期格式验证。六种常用格式
+	   @id=DOM id
+	   @param=[yyyy-mm-dd hh:mm:ss|yyyy/mm/dd hh:mm:ss|yyyymmdd hh:mm:ss|yyyy-mm-dd|yyyy/mm/dd|yyyymmdd]
+	  */
+	   
 
-	  func_date:function(id,param){},
+
 	  /*
 	   region(min[,max])
 	   验证区间，参数个数是1时验证区间值，参数个数是2时验证区间值范围
