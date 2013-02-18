@@ -8,32 +8,31 @@
 	 /*
 	   email()
 	   验证是否是email地址
-	   @id=DOM id
 	  */
     
 	  /*
 	   notNull()
 	   验证是否为空
-	   @id=DOM id
+	   
 	  */
 	 
 	  /*
 	   phone()
 	   座机0开头，7-8位
-	   @id=DOM id
+	   
 	  */
 	 
 
 	 /*
 	   mobile()
 	   手机号码，13,15,18开头
-	   @id=DOM id
+	   
 	  */
 	 
            /*
            date(param)
 	   日期格式验证。六种常用格式
-	   @id=DOM id
+	   
 	   @param=[yyyy-mm-dd hh:mm:ss|yyyy/mm/dd hh:mm:ss|yyyymmdd hh:mm:ss|yyyy-mm-dd|yyyy/mm/dd|yyyymmdd]
 	  */
 	   
@@ -42,7 +41,7 @@
 	  /*
 	   region(min[,max])
 	   验证区间，参数个数是1时验证区间值，参数个数是2时验证区间值范围
-	   @id=DOM id
+	   
 	   @param=(min[,max])
 	  */
 	 
@@ -50,21 +49,21 @@
          /*    
            regexp(regexp)
 	   根据正则表达式验证
-	   @id=DOM id
+	   
 	   @regexp=正则表达式
 	  */
 	 
           /*    
            float([num])
 	   验证小数点后有几位,无参数表示无限制
-	   @id=DOM id
+	   
 	   @param=([num])
 	  */
 	 
 	 /*
 	   abc(['a'|'A'])
 	   验证字母。param[0]='a'小写;param[0]='A'大写;无参数，默认，大小写混合
-	   @id=DOM id
+	   
 	   @param=(['a'|'A'])
 	  */
       
@@ -72,7 +71,7 @@
 	  /*
 	   123([min[,max]])
 	   验证数字类型param[0]=数字位数min;param[1]=数字位数max;参数只有一个则位数为固定值;无参数则默认不限制位数
-	   @id=DOM id
+	   
 	   @param=(min[,max])
 	  */
 	  
@@ -80,28 +79,28 @@
 	/* 
 	   a0_(['a'|'1'|'_'])
 	   验证字母。param[0]='a'字母开头;param[0]='1'数字开头;param[0]='_'下划线开头;无参数，默认，字母数字下划线混合
-	   @id=DOM id
+	   
 	   @param=(['a'|'1'|'_'])
 	  */
 	  
 
 	/*
-	   contain(string)
-	   验证是否包含某个任意字符param[0]要包含的字符,param[1]=i不区分大小写
-	   @id=DOM id
-	   @param=(string)
+	   contain(string[,i])
+	   验证是否包含某个任意字符param[0]要包含的字符,param[1]=i不区分大小写，此参数可选
+	   
+	   @param=(string[,i])
 	  */
 	  
          /*
 	   idcard()
 	   验证15、18位身份证
-	   @id=DOM id
+	   
 	  */
 	 
         /*
            compare(operator,value)
 	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值
-	   @id=DOM id
+	   
 	   @param=(operator,value)
 	  */
 	  
@@ -109,81 +108,81 @@
 	/*
 	   len(min[,max])
 	   验证长度，参数个数是1时验证长度值，参数个数是2时验证长度范围
-	   @id=DOM id
+	   
 	   @param=(min[,max])
 	  */
 
 	  /*
 	   p_int()
 	   验证正整数
-	   @id=DOM id
+	   
 	  */
          
 	 /*
 	   n_int()
 	   验证负整数
-	   @id=DOM id
+	   
 	  */
 	 
 	  /*
 	   p_123()
 	   验证正数
-	   @id=DOM id
+	   
 	  */
  
 	 /*
 	   n_123()
 	   验证负数
-	   @id=DOM id
+	   
 	  */
 	  
 	  /*
 	   not_n_123()
 	   验证非负数
-	   @id=DOM id
+	   
 	  */
 	 
          /*
 	   ip()
 	   验证ip
-	   @id=DOM id
+	   
 	  */
 	 
 	/*
 	   url()
 	   验证网址url
-	   @id=DOM id
+	   
 	  */
 	  
 	/* 
 	   chinese()
 	   验证中文
-	   @id=DOM id
+	   
 	  */
 	 
         /*
 	   zipcode()
 	   验证邮政编码
-	   @id=DOM id
+	   
 	  */
 
 	 /*
            ajax(url)
 	   ajax验证
 	   @return {resoult:true[false]}
-	   @id=DOM id
+	   
 	   @param(url)
 	  */
 
 	 /*
 	   ok()
 	   验证永远ok
-	   @id=DOM id
+	   
 	  */
 
 	  /*
 	   err()
 	   验证永远err
-	   @id=DOM id
+	   
 	  */
  
