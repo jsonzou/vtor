@@ -161,6 +161,7 @@
 				  'z-index':100
 			  });
 		     $vtor.config.show(_msgo);
+			 _msgo.show();//防止用户自定义show时没有显示信息的动作
               }
 			  _ido=null;
 		  },
