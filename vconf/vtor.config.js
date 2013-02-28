@@ -23,7 +23,7 @@ $vtor.custom=function(custom){
 	  * configMethod 获取vtor配置文件的方式；一般有两种方式：get,post;默认post
 	  */
       custom.vtor={
-	   //msg_type:'multiple'
+	   //msg_type:'multiple',
 	   //vtor_suf:'txt'
 	   //configMethod:'get'
 	  };

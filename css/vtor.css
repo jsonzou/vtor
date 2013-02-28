@@ -1,4 +1,4 @@
 .vtor-input-err-border{border:1px solid red;}
-.vtor-input-err-msg{display:none;border:1px solid red;background:#ddd;padding:5px;margin-left:5px;
+.vtor-input-err-msg{border:1px solid red;background:#ddd;padding:5px;margin-left:5px;
 					color:blue;max-width:180px;min-width:50px;
 					}

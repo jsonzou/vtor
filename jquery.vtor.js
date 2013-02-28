@@ -232,12 +232,14 @@
 							  }
 							  //ÌáÊ¾Óï¾ädiv
 							  var _msgo=$($vtor.constant.msg_html);
+							  
 							  var _ido= $("#"+$vtor.util.trim(validateTerms[0]));
+							  _msgo.hide();
 							  if(_ido&&_ido.length>0){
 							  _ido.after(_msgo);
 							  _msgo.addClass($vtor.config.msg_class);
-							  _msgo.css('left',_ido.offset().left+_ido.width())
-							  _msgo.css('top',_ido.offset().top)
+							  _msgo.css('left',_ido.offset().left+_ido.width());
+							  _msgo.css('top',_ido.offset().top);
 							  _ido.focus(function(){
 								  $(this).next('span.'+$vtor.config.msg_class).hide(500);
 								 
