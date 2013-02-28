@@ -586,7 +586,7 @@
 	   ajaxÑéÖ¤
 	   @return {result:true[false]}
 	   @id=DOM id
-	   @param(url)
+	   @param(url,method)
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_ajax']=function(id,param){
 		 var _value= $vtor.$id(id);
@@ -594,9 +594,13 @@
 				return true;
 			}
 		 var ajaxResult=false;
+		 var ajaxMethod='post';
+		 if(param&&param.length==2){
+		      ajaxMethod=param[1];
+		 }
 		 if(param&&param[0].length>0){
 		 $.ajax({
-				type:'get',
+				type:ajaxMethod,
 				async:false,
 			    dataType:'json',
 				url:param[0],

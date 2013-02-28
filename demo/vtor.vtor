@@ -35,4 +35,4 @@
  //ajax验证
 #ajaxDemo
 --notNull::<span style='color:red;'>*</span>必填
---ajax(demo.json)::ajax验证失败
+--ajax(demo.json,get)::ajax验证失败

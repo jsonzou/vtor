@@ -167,11 +167,12 @@
 	  */
 
 	 /*
-           ajax(url)
-	   ajax验证
-	   @return {resoult:true[false]}
+           ajax验证
+           ajax(url[,method])
+           method可有可无，有两个值可选：get,post;不填时默认post;
+	   @return {result:true[false]}
 	   
-	   @param(url)
+	   @param(url,method)
 	  */
 
 	 /*
