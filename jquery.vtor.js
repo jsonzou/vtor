@@ -81,7 +81,9 @@
 		 msg_class:'vtor-input-err-msg',
 		 errInput_class:'vtor-input-err-border',
 		 vtor_suf:'vtor',
-	     configMethod:'post'
+	     configMethod:'post',
+	     show:function(msg){msg.show(500);},
+	     hide:function(msg){msg.hide(500);}
 	  },
 	/*
 	  ***vtor³£Á¿***
@@ -158,7 +160,7 @@
 				  'position':'absolute',
 				  'z-index':100
 			  });
-		      _msgo.show(500);
+		     $vtor.config.show(_msgo);
               }
 			  _ido=null;
 		  },
@@ -241,8 +243,7 @@
 							  _msgo.css('left',_ido.offset().left+_ido.width());
 							  _msgo.css('top',_ido.offset().top);
 							  _ido.focus(function(){
-								  $(this).next('span.'+$vtor.config.msg_class).hide(500);
-								 
+								 $vtor.config.hide($(this).next('span.'+$vtor.config.msg_class));
 									  });
 							  ids[$vtor.util.trim(validateTerms[0])]=rules;
 							  }
