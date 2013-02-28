@@ -20,10 +20,12 @@ $vtor.custom=function(custom){
 	  * msg_class 提示框的样式； 默认vtor-input-err-msg
 	  * errInput_class 输入框错误的样式；默认 vtor-input-err-border
 	  * vtor_suf 验证文件扩展名配置；默认vtor
+	  * configMethod 获取vtor配置文件的方式；一般有两种方式：get,post;默认post
 	  */
       custom.vtor={
 	   //msg_type:'multiple'
 	   //vtor_suf:'txt'
+	   //configMethod:'get'
 	  };
 
 	  /*

@@ -80,7 +80,8 @@
 		 msg_type:'single',
 		 msg_class:'vtor-input-err-msg',
 		 errInput_class:'vtor-input-err-border',
-		 vtor_suf:'vtor'
+		 vtor_suf:'vtor',
+	     configMethod:'post'
 	  },
 	/*
 	  ***vtor常量***
@@ -153,33 +154,39 @@
 			  _ido.addClass($vtor.config.errInput_class);
 			  var _msgo= _ido.next('span.'+$vtor.config.msg_class);
 			  _msgo.html(msg);
+			  _msgo.css({
+				  'position':'absolute',
+				  'z-index':100
+			  });
 		      _msgo.show(500);
               }
 			  _ido=null;
 		  },
 		  dovalidate:function(view){
-		            var resoult=true;
+		            var result=true;
 					for(v in view){
 					   var ids=$vtor.vtorObject[view[v]];
 					  for(id in ids){
-						 var id_resoult=true;  
+						 var id_result=true;  
                          var validateTerms=ids[id];
                          for(validateTerm in validateTerms){
-						    var  _resoult=$vtor.lib.funcs[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](id,validateTerms[validateTerm].param);
-                            id_resoult=id_resoult&&_resoult;
-							if(!_resoult){
-								resoult=resoult&&_resoult;
+						    var  _result=$vtor.lib.funcs[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](id,validateTerms[validateTerm].param);
+							//alert(validateTerm+'='+_result)
+                            id_result=id_result&&_result;
+							 
+							if(!_result){
+								result=result&&_result;
 							  if($vtor.config.msg_type==$vtor.constant.msg_type_multiple){
 								  $vtor.core.show(id,validateTerms[validateTerm].msg);
-							     
+							      break;
 							  }else{
 								$('.'+$vtor.config.errInput_class).removeClass($vtor.config.errInput_class);
 								$('.'+$vtor.config.msg_class).hide();
 							    $vtor.core.show(id,validateTerms[validateTerm].msg);
-						        return resoult;
+						        return result;
 							  }
 						    }else{ 
-							  if(id_resoult){
+							  if(id_result){
 							   $('#'+id).removeClass($vtor.config.errInput_class);
 							  }
 							  $('.'+$vtor.config.msg_class).hide();
@@ -189,7 +196,7 @@
 					  }
 					 }
 					 
-					 return resoult;
+					 return result;
 			 
 			 
 		  },
@@ -248,7 +255,7 @@
 			  if($vtor.util.checkVtorPth(path)){
 			     
                     $.ajax({
-					    type: "post",
+					    type:$vtor.config.configMethod,
 					    url: path,
 					    async:false,
 					    dataType:'text',
@@ -575,7 +582,7 @@
 	 };
 	/*
 	   ajax验证
-	   @return {resoult:true[false]}
+	   @return {result:true[false]}
 	   @id=DOM id
 	   @param(url)
 	  */
@@ -584,7 +591,7 @@
 		    if(_value.length==0){
 				return true;
 			}
-		 var ajaxResoult=false;
+		 var ajaxResult=false;
 		 if(param&&param[0].length>0){
 		 $.ajax({
 				type:'get',
@@ -593,7 +600,7 @@
 				url:param[0],
 				data:id+"="+$vtor.$id(id),
 				success:function(data){
-				   ajaxResoult=data.resoult;
+				   ajaxResult=data.result;
 				},
 			    error:function(){
 				   alert('err:\n id='+id+' ajax validator error!');
@@ -604,7 +611,7 @@
 	     alert('err:\n id='+id+' ajax validator error! param of url not found ！');
 		 return false;
 	   }
-      return ajaxResoult;
+      return ajaxResult;
 	 };
 	 /*
 	   验证永远成功
