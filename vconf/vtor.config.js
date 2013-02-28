@@ -22,7 +22,7 @@ $vtor.custom=function(custom){
 	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  * configMethod 获取vtor配置文件的方式；一般有两种方式：get,post;默认post
 	  * show 消息框显示的动作
-	  * hide 消息框隐藏额动作
+	  * focus 用户鼠标焦点在显示出错信息的输入框框时的动作
 	  */
       custom.vtor={
 	   //msg_type:'multiple',

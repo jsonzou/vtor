@@ -83,7 +83,7 @@
 		 vtor_suf:'vtor',
 	     configMethod:'post',
 	     show:function(msg){msg.show(500);},
-	     hide:function(msg){msg.hide(500);}
+	     focus:function(msg){msg.hide(500);}
 	  },
 	/*
 	  ***vtor³£Á¿***
@@ -243,8 +243,12 @@
 							  _msgo.css('left',_ido.offset().left+_ido.width());
 							  _msgo.css('top',_ido.offset().top);
 							  _ido.focus(function(){
-								 $vtor.config.hide($(this).next('span.'+$vtor.config.msg_class));
-									  });
+								 if($(this).next('span.'+$vtor.config.msg_class).is(":visible")){
+									  $vtor.config.focus($(this).next('span.'+$vtor.config.msg_class));
+								  }else{
+								      $(this).next('span.'+$vtor.config.msg_class).hide();
+								  }
+								});
 							  ids[$vtor.util.trim(validateTerms[0])]=rules;
 							  }
 					   }
