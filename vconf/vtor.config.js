@@ -21,8 +21,8 @@ $vtor.custom=function(custom){
 	  * errInput_class 输入框错误的样式；默认 vtor-input-err-border
 	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  * configMethod 获取vtor配置文件的方式；一般有两种方式：get,post;默认post
-	  * show 消息框显示的动作
-	  * focus 用户鼠标焦点在显示出错信息的输入框框时的动作
+	  * show 消息框显示的动作:function(msg){//这里写你的自定义代码；msg是错误提示框的jQuery对象}
+	  * focus 用户鼠标焦点在显示出错信息的输入框框时的动作:function(msg){//这里写你的自定义代码；msg是错误提示框的jQuery对象}
 	  */
       custom.vtor={
 	   //msg_type:'multiple',
