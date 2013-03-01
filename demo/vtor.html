@@ -12,10 +12,15 @@
 	<link rel='stylesheet'  href='../css/vtor.css'/>
   <script>
       $(function(){
-	        $vtor.$('vtor.vtor',['model1']);
+	        $vtor.$({
+			path:'vtor.vtor',
+			view:'model1',
+			auto:true//,
+			//autoFunc:'change'
+			});
            $("#b").click(function(){
 				var r=$vtor.$v();
-				 //alert(r)
+				 alert(r)
 		   });
 	  })
   </script>
@@ -26,14 +31,15 @@
   <fieldset style='width:500px;'>
    <div STYLE='background:#ccc;text-align:center;color:blue;font-weight:bold;font-size:16;height:28px;padding:5px;border-bottom:1px solid #aaa;'>Vtor示例-作者JsonZou</div>
 	<table>
-	<tr><td>电子邮箱地址:</td><td><input type='text' id='emailAddress' value=''/></td></tr>
-	<tr><td>长度:</td><td><input type='text' id='lenth2' value=''/></td></tr>
-	<tr><td>范围:</td><td><input type='text' id='region3' value=''/></td></tr>
-	<tr><td>小数:</td><td><input type='text' id='float2' value=''/></td></tr>
-	<tr><td>比较:</td><td><input type='text' id='compareNum' value=''/></td></tr>
-	<tr><td>整形:</td><td><input type='text' id='integerNum' value=''/></td></tr>
-	<tr><td>中文:</td><td><input type='text' id='chineseLG' value=''/></td></tr>
-	<tr><td>ajax:</td><td><input type='text' id='ajaxDemo' value=''/></td></tr>
+	<tr><td>电子邮箱地址:</td><td><input type='text' vid='emailAddress' value=''/></td></tr>
+	<tr><td>长度:</td><td><input type='text' vid='lenth2' value=''/></td></tr>
+	<tr><td>范围:</td><td><input type='text' vid='region3' value=''/></td></tr>
+	<tr><td>小数:</td><td><input type='text' vid='float2' value=''/></td></tr>
+	<tr><td>比较:</td><td><input type='text' vid='compareNum' value=''/></td></tr>
+	<tr><td>整形:</td><td><input type='text' vid='integerNum' value=''/></td></tr>
+	<tr><td>中文:</td><td><input type='text' vid='chineseLG' value=''/></td></tr>
+	<tr><td>sql注入:</td><td><input type='text' vid='sqlzhuru' value=''/></td></tr>
+	<tr><td>ajax:</td><td><input type='text' vid='ajaxDemo' value=''/></td></tr>
 	<tr><td colspan=2 align=center>  <input type='button' id='b' value='submit'style='border:1px solid #aaa;width:80px;height:25px;font-weight:bold;' /></td></tr>
 	 </table>
   <div STYLE='background:#ccc;text-align:center;color:blue;font-weight:bold;font-size:12px;height:30px;padding:5px;border-bottom:1px solid #aaa;'>

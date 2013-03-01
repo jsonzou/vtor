@@ -7,32 +7,44 @@
 --notNull()::<span style='color:red;'>*</span>必填
 --email()::邮箱格式不正确
 --contain(163.com,i)::请填入163邮箱地址
+--ok()::ok
 //验证长度
 #lenth2
 --notNull()::<span style='color:red;'>*</span>必填
 --len(2)::只能是两个字符
+--ok()::ok
 //验证数字区间
 #region3
 --notNull()::<span style='color:red;'>*</span>必填
 --region(3)::只能填写数字3
+--ok()::ok
 //验证浮点型
 #float2
 --notNull()::<span style='color:red;'>*</span>必填
 --float(2)::两位小数
+--ok()::ok
 //验证比较结果
 #compareNum
 --notNull()::<span style='color:red;'>*</span>必填
 --compare(<,4)::填写小于4的数字
 --region(2,3)::2~3之间
+--ok()::ok
 //验证正整数
 #integerNum
 --notNull::<span style='color:red;'>*</span>必填
 --p_int()::正整数
+--ok()::ok
 //验证中文
 #chineseLG
 --notNull::<span style='color:red;'>*</span>必填
  --chinese()::输入中文
+ --ok()::ok
  //ajax验证
 #ajaxDemo
 --notNull::<span style='color:red;'>*</span>必填
 --ajax(demo.json,get)::ajax验证失败
+--ok()::ok
+#sqlzhuru
+--notNull::<span style='color:red;'>*</span>必填
+--sqlin()::输入字符非法，有sql注入的危险
+--ok()::ok

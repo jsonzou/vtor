@@ -9,19 +9,23 @@
 	   /**
 		 * 初始化
 		 */
-	  $:function(path,view){
-	     $vtor.init(path,view);
+	  $:function(vc){
+		  
+	     $vtor.init(vc);
 	  },
 	  $v:function(){
 	    return $vtor.validate();
 	  },
 	  $id:function(id){
-		  return $vtor.util.getValById(id);
+		  return $vtor.util.getValByVId(id);
 	  },
-      init:function(path,view){
+      init:function(vc){
 		 //加载lib、config、css
          $vtor.lib.init();
-		 
+		 //验证参数
+		 if(vc){
+		  $.extend($vtor.vc,vc);
+		 }
 		 var custom={};
 		 
 		 if($vtor.custom){
@@ -37,22 +41,32 @@
 		 }
 		 
 		 }
+		  //$vtor.constant.autoCheck=autoCheck;
 		  //获取验证文件配置信息
-	       $vtor.core.getVtors(path);
+	       $vtor.core.getVtors($vtor.vc.path);
 		  //构建验证部件
 		   $vtor.core.builtVtors();
-		  //初始化验证模块 
-		   $vtor.view=view;
-
 		    //alert($vtor.vtorStr) 
 			//alert(JSON.stringify($vtor.vtorObject)) 
 		   },
+	  result:true,
       //配置文件字符串
       vtorStr:'',
 	 //验证部件
-      vtorObject:{},
-	//验证模块
-	  view:[],
+     // vtorObject:{},
+     /*
+	  ***验证参数配置***
+      * path 验证配置文件路径
+	  * view 当前页面名
+	  * auto 是否开启自动验证
+	  * autoFunc 自动验证方式函数
+	  */
+	 vc:{
+	    path:'',
+	    view:'',
+	    auto:false,
+        autoFunc:'keyup'
+	  },
 	/*
 	  ***vtor配置***
       * func_pre 验证函数前缀
@@ -64,8 +78,10 @@
 	  * param_end 配置文件验证参数结束字符
 	  * param_split 配置文件验证参数分隔符
 	  * msg_type 提示类型：single只提示最靠前的一个错误验证；multiple提示全部错误验证
-	  * msg_class 提示框的样式
+	  * errMsg_class 提示框的样式
 	  * errInput_class 输入框错误的样式
+	  * okMsg_class 提示框的样式
+	  * okInput_class 输入框错误的样式
 	  * vtor_suf 验证文件扩展名配置
 	  */
 	 config:{
@@ -77,13 +93,15 @@
 		 param_begin:'(',
 		 param_end:')',
 		 param_split:',',
-		 msg_type:'single',
-		 msg_class:'vtor-input-err-msg',
+	     msg_type:'single',
+		 errMsg_class:'vtor-input-err-msg',
 		 errInput_class:'vtor-input-err-border',
+		 okMsg_class:'vtor-input-ok-msg',
+		 okInput_class:'vtor-input-ok-border',
 		 vtor_suf:'vtor',
 	     configMethod:'post',
-	     show:function(msg){msg.show(500);},
-	     focus:function(msg){msg.hide(500);}
+	     show:function(vid,msg,result){msg.show(500);},
+	     bind:function(vid,msg){}
 	  },
 	/*
 	  ***vtor常量***
@@ -93,13 +111,11 @@
 	  */
 	constant:{
 		func_middle:'_',
-	    msg_html:"<span>&nbsp;</span>",
-		msg_type_single:'single',
-		msg_type_multiple:'multiple'
+	    msg_html:"<span>&nbsp;</span>"
 	  },
 		//执行验证
 	  validate:function(){
-	    return $vtor.core.dovalidate($vtor.view);
+	    return $vtor.core.dovalidate($vtor.vc.view);
 	  },
 	 /*
       ***工具包***
@@ -108,14 +124,23 @@
 	  * getParam 处理验证参数
 	  */
       util:{
-		getValById:function(id){
-		   return $("#"+id).val();
+		getValByVId:function(id){
+		   return $("[vid="+id+"]").val();
 		},
 	    clearAnnotation:function(str){
 			 return str.replace(/\/\*(\s|.)*?\*\//g,'').replace(/(?!http:)\/\/.*/g ,'');
 		  },
 		trim : function(str) { 
 				return str.replace(/(^\s*)|(\s*$)/g, ""); 
+				},
+		hasClass:function($obj,clazz){
+				if(!$obj){return false;}
+				 var classStr=$obj.attr('class');
+				 if(classStr&&classStr.length>0){
+					 var clazzs = classStr.split(" ");   
+                    return $.inArray(clazz, clazzs);
+				 }
+                return false;   
 				},
 		getParam:function(param){
 			   if(!$vtor.util.trim(param)){
@@ -150,58 +175,72 @@
 	  */
 	  core:{
 		  
-		  show:function(id,msg){
-			  var _ido=$("#"+id);
+		  show:function(id,msg,errOrok){
+			  var _ido=$("[vid="+id+"]");
 			  if(_ido&&_ido.length>0){
-			  _ido.addClass($vtor.config.errInput_class);
-			  var _msgo= _ido.next('span.'+$vtor.config.msg_class);
+			  var _msgo= _ido.next('span.vtor-msg-style');
+              $vtor.core.renderClass(_ido,_msgo,errOrok);  
 			  _msgo.html(msg);
 			  _msgo.css({
 				  'position':'absolute',
 				  'z-index':100
 			  });
-		     $vtor.config.show(_msgo);
-			 _msgo.show();//防止用户自定义show时没有显示信息的动作
+		     $vtor.config.show(_ido,_msgo,errOrok);
               }
 			  _ido=null;
 		  },
+
+	      renderClass:function(_ido,_msgo,errOrok){
+			  if(!errOrok){
+                _ido.addClass($vtor.config.errInput_class);
+				_msgo.addClass($vtor.config.errMsg_class);
+				 _ido.removeClass($vtor.config.okInput_class);
+				_msgo.removeClass($vtor.config.okMsg_class);
+			  }else{
+			    _ido.removeClass($vtor.config.errInput_class);
+				_msgo.removeClass($vtor.config.errMsg_class);
+				 _ido.addClass($vtor.config.okInput_class);
+				_msgo.addClass($vtor.config.okMsg_class);
+			  }
+		  },
 		  dovalidate:function(view){
-		            var result=true;
-					for(v in view){
-					   var ids=$vtor.vtorObject[view[v]];
-					  for(id in ids){
-						 var id_result=true;  
-                         var validateTerms=ids[id];
-                         for(validateTerm in validateTerms){
-						    var  _result=$vtor.lib.funcs[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](id,validateTerms[validateTerm].param);
-							//alert(validateTerm+'='+_result)
-                            id_result=id_result&&_result;
+						$("[vid]").each(function(i,n){
+						   var r=$vtor.core.IDvalidate(view,$(this).attr('vid'));
+						   $vtor.result=$vtor.result&&r;
+						   if(!r&&$vtor.config.msg_type!='multiple'){
+						      return false;
+						   }
+                            $vtor.result=$vtor.result&&r;
+						}); 
+					 return $vtor.result;
+		  },
+	     IDvalidate:function(view,cuid){
+			             
+					 	 var id_result=true;  
+						  var validateTerms= $('[vid='+cuid+']').data('vtor');
+						  if(!validateTerms){
+                               return true;
+						  }
+                         for(var validateTerm in validateTerms){
 							 
-							if(!_result){
-								result=result&&_result;
-							  if($vtor.config.msg_type==$vtor.constant.msg_type_multiple){
-								  $vtor.core.show(id,validateTerms[validateTerm].msg);
+						    var  _result=$vtor.lib.funcs[$vtor.config.func_pre+$vtor.constant.func_middle+validateTerm](cuid,validateTerms[validateTerm].param);
+							  
+                            id_result=id_result&&_result;
+							  
+                             if(!_result){
+								 
+							  $vtor.core.show(cuid,validateTerms[validateTerm].msg,_result);
 							      break;
-							  }else{
-								$('.'+$vtor.config.errInput_class).removeClass($vtor.config.errInput_class);
-								$('.'+$vtor.config.msg_class).hide();
-							    $vtor.core.show(id,validateTerms[validateTerm].msg);
-						        return result;
-							  }
-						    }else{ 
-							  if(id_result){
-							   $('#'+id).removeClass($vtor.config.errInput_class);
-							  }
-							  $('.'+$vtor.config.msg_class).hide();
-							}
-					    
+							 }
 						 }
-					  }
-					 }
-					 
-					 return result;
-			 
-			 
+                       //如果验证正确显示验证正确消息提示
+                        if(id_result){
+							   if(validateTerms['ok']){
+								$vtor.core.show(cuid,validateTerms['ok'].msg,id_result);
+						       }
+						}
+				 
+					 return id_result;
 		  },
 		  builtVtors:function(){
 			 return  (function(){
@@ -236,32 +275,32 @@
 							  //提示语句div
 							  var _msgo=$($vtor.constant.msg_html);
 							  
-							  var _ido= $("#"+$vtor.util.trim(validateTerms[0]));
+							  var _ido= $("[vid="+$vtor.util.trim(validateTerms[0])+"]");
+							  
 							  _msgo.hide();
 							  if(_ido&&_ido.length>0){
 							  _ido.after(_msgo);
-							  _msgo.addClass($vtor.config.msg_class);
+							  _msgo.addClass('vtor-msg-style');
 							  _msgo.css('left',_ido.offset().left+_ido.width());
 							  _msgo.css('top',_ido.offset().top);
-							  _ido.focus(function(){
-								 if($(this).next('span.'+$vtor.config.msg_class).is(":visible")){
-									  $vtor.config.focus($(this).next('span.'+$vtor.config.msg_class));
-								  }else{
-								      $(this).next('span.'+$vtor.config.msg_class).hide();
-								  }
-								});
-							  ids[$vtor.util.trim(validateTerms[0])]=rules;
+							  if($vtor.vc.auto){
+							      _ido.bind($vtor.vc.autoFunc,function(){
+							          $vtor.core.IDvalidate($vtor.view,$(this).attr('vid')); 
+							     });
+							  } 
+							 _ido.data('vtor',rules);
+							//创建验证部件时绑定函数   
+							 $vtor.config.bind(_ido,_msgo);
+							 
 							  }
 					   }
 				   }
-				  $vtor.vtorObject[$vtor.util.trim(validates[0])]=ids;
 				}
 			  }	 
 			  })();
 		  },
 		  getVtors:function(path){
 			  if($vtor.util.checkVtorPth(path)){
-			     
                     $.ajax({
 					    type:$vtor.config.configMethod,
 					    url: path,
@@ -271,7 +310,6 @@
 						$vtor.vtorStr+=data;
 				        } 
 			        });
-			      
 				  $vtor.vtorStr=$vtor.util.clearAnnotation($vtor.vtorStr);
 
 			  }
@@ -282,7 +320,7 @@
 	    init:function(){
 		      /*
 	   验证是否是email地址
-	   @id=DOM id
+	   @id=DOM vid
 	  */
       $vtor.lib.funcs[$vtor.config.func_pre+'_email']=function(id,undefined){
 		 
@@ -290,7 +328,7 @@
        };
 	  /*
 	   验证是否为空
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_notNull']=function(id,undefined){
 		   var _value=$vtor.$id(id);
@@ -301,7 +339,7 @@
 	   };
 	  /*
 	   座机0开头，7-8位
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_phone']=function(id,undefined){
 		 
@@ -310,7 +348,7 @@
 	   };
 	 /*
 	   手机号码，13,15,18开头
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_mobile']=function(id,undefined){
 		  
@@ -320,7 +358,7 @@
 	   日期格式验证。
 	   param=[yyyy-mm-dd hh:mm:ss|yyyy/mm/dd hh:mm:ss|yyyymmdd hh:mm:ss|yyyy-mm-dd|yyyy/mm/dd|yyyymmdd]
 	   六种常用格式
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_date']=function(id,param){
 		  var formats=[
@@ -361,7 +399,7 @@
 	  };
 	  /*
 	   验证区间，参数个数是1时验证区间值，参数个数是2时验证区间值范围
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(min[,max])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_region']=function(id,param){
@@ -385,19 +423,19 @@
 	   };
      /*
 	   根据正则表达式验证
-	   @id=DOM id
+	   @id=DOM vid
 	   @regexp=正则表达式
 	  */
-	  $vtor.lib.funcs[$vtor.config.func_pre+'_regexp']=function(id,regexp){
+	  $vtor.lib.funcs[$vtor.config.func_pre+'_regexp']=function(id,regexp,rule){
 	       var _value= $vtor.$id(id);
 		   if(_value.length==0){return true;}
-		  var re = new RegExp(regexp,''); // 创建正则表达式对象。
+		  var re = new RegExp(regexp,rule?rule:''); // 创建正则表达式对象。
 		   return re.test(_value);
 	   };
 	 /*    
        float([num])
 	   验证小数点后有几位,无参数表示无限制
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=([num])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_float']=function(id,param){
@@ -408,7 +446,7 @@
 	  };
 	/*
 	   验证字母。param[0]='a'小写;param[0]='A'大写;无参数，默认，大小写混合
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(['a'|'A'])
 	  */
       $vtor.lib.funcs[$vtor.config.func_pre+'_abc']=function(id,param){
@@ -422,7 +460,7 @@
 	   };
 	  /*
 	   验证数字类型param[0]=数字位数min;param[1]=数字位数max;参数只有一个则位数为固定值;无参数则默认不限制位数
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(min[,max])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_123']=function(id,param){
@@ -436,7 +474,7 @@
 		};
 	/*
 	   验证字母。param[0]='a'字母开头;param[0]='1'数字开头;param[0]='_'下划线开头;无参数，默认，字母数字下划线混合
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(['a'|'1'|'_'])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_a0_']=function(id,param){
@@ -453,7 +491,7 @@
 		};
 	/*
 	   验证是否包含某个任意字符param[0]要包含的字符,param[1]=i不区分大小写
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(string)
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_contain']=function(id,param){
@@ -476,7 +514,7 @@
 	   };
 	/*
 	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值;
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(operator,value)
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_compare']=function(id,param){
@@ -499,7 +537,7 @@
 	  };
 	/*
 	   验证长度，参数个数是1时验证长度值，参数个数是2时验证长度范围
-	   @id=DOM id
+	   @id=DOM vid
 	   @param=(min[,max])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_len']=function(id,param){
@@ -522,7 +560,7 @@
 	   };
 	 /*
 	   验证正整数
-	   @id=DOM id
+	   @id=DOM vid
 	  */
      $vtor.lib.funcs[$vtor.config.func_pre+'_p_int']=function(id,undefined){
 		 
@@ -530,7 +568,7 @@
 	 };
 	 /*
 	   验证负整数
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_n_int']=function(id,undefined){
 		 
@@ -538,21 +576,21 @@
 	 };
 	  /*
 	   验证正数
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_p_123']=function(id,undefined){
 	   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^(([1-9]+[0-9]*.{1}[0-9]+)|([0].{1}[1-9]+[0-9]*)|([1-9][0-9]*)|([0][.][0-9]+[1-9]*))$' );
 	 };
 	 /*
 	   验证负数
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_n_123']=function(id,undefined){
 	   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^\\-(([1-9]+[0-9]*.{1}[0-9]+)|([0].{1}[1-9]+[0-9]*)|([1-9][0-9]*)|([0][.][0-9]+[1-9]*))$' );
 	 };
 	  /*
 	   验证非负数
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_not_n_123']=function(id,undefined){
 		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^\\d+(\\.\\d+)?$' )
@@ -560,7 +598,7 @@
 	 };
 	/*
 	   验证ip
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_ip']=function(id,undefined){
 		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^((0[0-9]|1[0-9]\\d{1,2})|(2[0-5][0-5])|(2[0-4][0-9])|(\\d{1,2}))\\.((0[0-9]|1[0-9]\\d{1,2})|(2[0-5][0-5])|(2[0-4][0-9])|(\\d{1,2}))\\.((0[0-9]|1[0-9]\\d{1,2})|(2[0-4][0-9])|(2[0-5][0-5])|(\\d{1,2}))\\.((0[0-9]|1[0-9]\\d{1,2})|(2[0-4][0-9])|(2[0-5][0-5])|(\\d{1,2}))$' )
@@ -568,7 +606,7 @@
 	 };
 	/*
 	   验证网址url
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_url']=function(id,undefined){
 		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$' );
@@ -576,22 +614,22 @@
 	 };
 	/*
 	   验证汉字
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_chinese']=function(id,undefined){
 		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^[\u4e00-\u9fa5]+$' );
 	 };
      /*
 	   验证邮政编码
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_zipcode']=function(id,undefined){
-		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^[a-zA-Z0-9 ]{3,12}$' )
+		 return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^[1-9][0-9]{5}$' )
 	 };
 	/*
 	   ajax验证
 	   @return {result:true[false]}
-	   @id=DOM id
+	   @id=DOM vid
 	   @param(url,method)
 	  */
 	 $vtor.lib.funcs[$vtor.config.func_pre+'_ajax']=function(id,param){
@@ -625,16 +663,29 @@
 	   }
       return ajaxResult;
 	 };
+
+	 
+   /*
+	   验证sql注入
+	   @id=DOM vid
+	  */
+	  $vtor.lib.funcs[$vtor.config.func_pre+'_sqlin']=function(id,undefined){
+	      var _value= $vtor.$id(id);
+		    if(_value.length==0){
+				return true;
+			} 
+	 return !$vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,"\'|Select|Update|Delete|insert|Count|drop table|truncate|Asc|Mid|char|xp_cmdshell|exec master|net localgroup administrators|And|net user|Or" ,'i');
+	   };
 	 /*
 	   验证永远成功
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_ok']=function(id,undefined){
 	      return true;
 	   };
 	  /*
 	   验证永远失败
-	   @id=DOM id
+	   @id=DOM vid
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_err']=function(id,undefined){
 	      return false;

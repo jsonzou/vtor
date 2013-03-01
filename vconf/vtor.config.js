@@ -17,17 +17,36 @@ $vtor.custom=function(custom){
 	  * param_end 配置文件验证参数结束字符；默认 )
 	  * param_split 配置文件验证参数分隔符；默认 ,
 	  * msg_type 提示类型:single只提示最靠前的一个错误验证；multiple提示全部错误验证；默认 single
-	  * msg_class 提示框的样式； 默认vtor-input-err-msg
+	  * errMsg_class 提示框错误的样式； 默认vtor-input-err-msg
 	  * errInput_class 输入框错误的样式；默认 vtor-input-err-border
+	  * okMsg_class 提示框正确的样式； 默认vtor-input-ok-msg
+	  * okInput_class 输入框正确的样式；默认 vtor-input-ok-border
 	  * vtor_suf 验证文件扩展名配置；默认vtor
 	  * configMethod 获取vtor配置文件的方式；一般有两种方式：get,post;默认post
-	  * show 消息框显示的动作:function(msg){//这里写你的自定义代码；msg是错误提示框的jQuery对象};默认function(msg){msg.show(500);}
-	  * focus 用户鼠标焦点在显示出错信息的输入框框时的动作:function(msg){//这里写你的自定义代码；msg是错误提示框的jQuery对象};默认function(msg){msg.hide(500);}
+	  * show 消息框显示的动作:function(vid,msg,result){//这里写你的自定义代码；vid是输入框的jQuery对象，msg是错误提示框的jQuery对象;result表示验证结果};默认function(vid,msg,result){msg.show(500);}
+	  * bind 初始化验证组件完毕时执行的函数:function(vid,msg){//这里写你的自定义代码；vid是输入框的jQuery对象，msg是错误提示框的jQuery对象;};默认function(vid,msg){}
 	  */
       custom.vtor={
-	   //msg_type:'multiple',
+	  // msg_type:'multiple'
 	   //vtor_suf:'txt'
 	   //configMethod:'get'
+	 /*  show:function(vid,msg,result){
+		   if(!result){
+			    msg.hide();
+			    alert(msg.text())
+				  
+		   }else{
+			   msg.show(500);
+			   }
+	   
+	   
+	   },
+	   bind:function(vid,msg){
+	      vid.hover(
+			function(){vid.css('border','1px dashed #555');},
+			function(){vid.css('border','1px solid #000');}
+		  );
+	   }*/
 	  };
 
 	  /*

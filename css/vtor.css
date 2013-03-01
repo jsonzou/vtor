@@ -2,3 +2,7 @@
 .vtor-input-err-msg{border:1px solid red;background:#ddd;padding:5px;margin-left:5px;
 					color:blue;max-width:180px;min-width:50px;
 					}
+.vtor-input-ok-border{border:1px solid green;}
+.vtor-input-ok-msg{border:1px solid green;background:#ddd;padding:5px;margin-left:5px;
+					color:blue;max-width:180px;min-width:50px;
+					}
