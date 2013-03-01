@@ -41,10 +41,11 @@ $vtor.custom=function(custom){
 	   
 	   
 	   },
-	   bind:function(vid,msg){
-	      vid.hover(
-			function(){vid.css('border','1px dashed #555');},
-			function(){vid.css('border','1px solid #000');}
+	  bind:function(vid,msg){
+		   vid.css('border','1px solid #888');
+	       vid.hover(
+			function(){vid.css('border','1px dashed #888');},
+			function(){vid.css('border','1px solid #888');}
 		  );
 	   }*/
 	  };
