@@ -522,9 +522,9 @@
 		    if(_value.length==0){
 				return true;
 			}
-	     if(param&&param.length==2){
+	     if(param&&param.length>=2){
 			 var operator=param[0];
-		     var val=param[1];
+		     var val=param.length==3?param[2]==1?$vtor.$id(param[1]):param[1]:param[1];
 			 var _value= $vtor.$id(id);
               return operator=='<'?_value<val:
 				          operator=='>'?_value>val:

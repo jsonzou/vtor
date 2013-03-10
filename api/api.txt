@@ -98,10 +98,10 @@
 	  */
 	 
         /*
-           compare(operator,value)
-	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值
+           compare(operator,value[,type])
+	   验证比较param有三个参数：param[0]=['<'|'='|'>'|'>='|'<='];param[1]=验证的值（或者是验证的vid的值）;param[2]可写可不写，param[2]=1时会把param[1]当做vid去验证；默认是0，即与固定值验证。
 	   
-	   @param=(operator,value)
+	   @param=(operator,value[,type])
 	  */
 	  
 
@@ -170,7 +170,8 @@
            ajax验证
            ajax(url[,method])
            method可有可无，有两个值可选：get,post;不填时默认post;
-	   @return {result:true[false]}
+           验证时在后台接收vid对应的值就是你输入的参数
+	   @return {'result':true[false]}
 	   
 	   @param(url,method)
 	  */

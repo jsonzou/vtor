@@ -48,3 +48,14 @@
 --notNull::<span style='color:red;'>*</span>必填
 --sqlin()::输入字符非法，有sql注入的危险
 --ok()::ok
+#pwd1
+--notNull::<span style='color:red;'>*</span>必填
+--len(6)::请输入6位字符
+--ok()::ok
+#pwd2
+--notNull::<span style='color:red;'>*</span>必填
+--len(6)::请输入6位字符
+--compare(=,pwd1,1)::与输入密码不一致
+--ok()::ok
+
+  
