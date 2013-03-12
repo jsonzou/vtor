@@ -217,7 +217,7 @@
 	     IDvalidate:function(view,cuid){
 			             
 					 	 var id_result=true;  
-						  var validateTerms= $('[vid='+cuid+']').data('vtor');
+						  var validateTerms= $('[vid='+cuid+']').data('vtor-'+view);
 						  if(!validateTerms){
                                return true;
 						  }
@@ -248,6 +248,7 @@
 			   for(s in strs){
 				if($vtor.util.trim(strs[s])){
 				   var validates=strs[s].split($vtor.config.id_pre)
+					   
 				   var ids={};
 				   for(var i=1;i<validates.length;i++){
 					  if($vtor.util.trim(validates[i])){
@@ -288,7 +289,7 @@
 							          $vtor.core.IDvalidate($vtor.view,$(this).attr('vid')); 
 							     });
 							  } 
-							 _ido.data('vtor',rules);
+							 _ido.data('vtor-'+$vtor.util.trim(validates[0]),rules);
 							//创建验证部件时绑定函数   
 							 $vtor.config.bind(_ido,_msgo);
 							 
@@ -398,7 +399,7 @@
 		   return false;
 	  };
 	  /*
-	   验证区间，参数个数是1时验证区间值，参数个数是2时验证区间值范围
+	   验证区间，参数个数是1时验证区间值，参数个数是2时验证区间值范围:(~,n)表示<=n，(n,~)表示>=n
 	   @id=DOM vid
 	   @param=(min[,max])
 	  */
@@ -416,8 +417,11 @@
 		   
 		  if(param.length==1&&_value==param[0]){
 		      return true;
-		  }else if(param.length==2&&_value>=param[0]&&_value<=param[1]){
-		      return true;
+		  }else if(param.length==2){
+			 
+		      return  param[0]=='~'?_value<=param[1]:
+				      param[1]=='~'?_value>=param[0]:
+				      _value>=param[0]&&_value<=param[1];
 		  }
 		 return false;
 	   };
@@ -536,7 +540,8 @@
 		 return false;
 	  };
 	/*
-	   验证长度，参数个数是1时验证长度值，参数个数是2时验证长度范围
+	   验证长度，参数个数是1时验证长度值，参数个数是2时验证长度范围:(~,n)表示<=n，(n,~)表示>=n
+	   
 	   @id=DOM vid
 	   @param=(min[,max])
 	  */
@@ -551,10 +556,15 @@
 		   var _value= $vtor.$id(id);
            var len=_value.length;
 		  
+
 		  if(param.length==1&&len==parseInt(param[0],10)){
 		      return true;
-		  }else if(param.length==2&&len>=parseInt(param[0],10)&&len<=parseInt(param[1],10)){
-		      return true;
+		  }else if(param.length==2){
+			  
+              return param[0]=='~'?len<=parseInt(param[1],10):
+				     param[1]=='~'?len>=parseInt(param[0],10):
+				     len>=parseInt(param[0],10)&&len<=parseInt(param[1],10);
+ 
 		  }
 		 return false;
 	   };

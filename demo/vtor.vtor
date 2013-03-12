@@ -58,4 +58,11 @@
 --compare(=,pwd1,1)::与输入密码不一致
 --ok()::ok
 
-  
+ @model2
+
+//验证email
+#emailAddress
+--notNull()::<span style='color:red;'>*</span>必填1
+--email()::邮箱格式不正确1
+--contain(163.com,i)::请填入163邮箱地址1
+--ok()::ok1
