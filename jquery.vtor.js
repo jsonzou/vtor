@@ -218,6 +218,7 @@
 			             
 					 	 var id_result=true;  
 						  var validateTerms= $('[vid='+cuid+']').data('vtor-'+view);
+						  
 						  if(!validateTerms){
                                return true;
 						  }
@@ -286,10 +287,10 @@
 							  _msgo.css('top',_ido.offset().top);
 							  if($vtor.vc.auto){
 							      _ido.bind($vtor.vc.autoFunc,function(){
-							          $vtor.core.IDvalidate($vtor.view,$(this).attr('vid')); 
+							          $vtor.core.IDvalidate($vtor.vc.view,$(this).attr('vid')); 
 							     });
 							  } 
-							 _ido.data('vtor-'+$vtor.util.trim(validates[0]),rules);
+							 _ido.data('vtor-'+$vtor.vc.view,rules);
 							//创建验证部件时绑定函数   
 							 $vtor.config.bind(_ido,_msgo);
 							 
@@ -404,6 +405,7 @@
 	   @param=(min[,max])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_region']=function(id,param){
+		  
 		   var _value= $vtor.$id(id);
 		   if(_value.length==0){return true;}
 
@@ -414,7 +416,7 @@
 		  if(!$vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^\\d+$')){
 		    return false;
 		  }
-		   
+		    
 		  if(param.length==1&&_value==param[0]){
 		      return true;
 		  }else if(param.length==2){
@@ -560,7 +562,7 @@
 		  if(param.length==1&&len==parseInt(param[0],10)){
 		      return true;
 		  }else if(param.length==2){
-			  
+			 
               return param[0]=='~'?len<=parseInt(param[1],10):
 				     param[1]=='~'?len>=parseInt(param[0],10):
 				     len>=parseInt(param[0],10)&&len<=parseInt(param[1],10);
