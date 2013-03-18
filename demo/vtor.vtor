@@ -58,8 +58,10 @@
 --compare(=,pwd1,1)::与输入密码不一致
 --ok()::ok
 
- @model2
-
+/*
+ 验证页面模块model2
+*/
+@model2
 //验证email
 #emailAddress
 --notNull()::<span style='color:red;'>*</span>必填1
