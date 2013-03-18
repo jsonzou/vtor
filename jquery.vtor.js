@@ -215,10 +215,11 @@
 					 return $vtor.result;
 		  },
 	     IDvalidate:function(view,cuid){
-			             
+			            
 					 	 var id_result=true;  
-						  var validateTerms= $('[vid='+cuid+']').data('vtor-'+view);
-						  
+					 
+						  var validateTerms= $('[vid='+cuid+']').data('vtor-'+view+'-'+cuid);
+						 
 						  if(!validateTerms){
                                return true;
 						  }
@@ -248,9 +249,15 @@
 			    var strs=$vtor.vtorStr.split($vtor.config.view_pre); 
 			   for(s in strs){
 				if($vtor.util.trim(strs[s])){
+					 
 				   var validates=strs[s].split($vtor.config.id_pre)
 					   
 				   var ids={};
+                   var currView=$vtor.util.trim(validates[0]);
+				  
+				   if(!currView||currView!=$vtor.vc.view){
+					   continue;
+				   }
 				   for(var i=1;i<validates.length;i++){
 					  if($vtor.util.trim(validates[i])){
 							  var validateTerms=validates[i].split($vtor.config.validateTerm_pre);
@@ -287,10 +294,12 @@
 							  _msgo.css('top',_ido.offset().top);
 							  if($vtor.vc.auto){
 							      _ido.bind($vtor.vc.autoFunc,function(){
+									 
 							          $vtor.core.IDvalidate($vtor.vc.view,$(this).attr('vid')); 
 							     });
 							  } 
-							 _ido.data('vtor-'+$vtor.vc.view,rules);
+					       
+							 _ido.data('vtor-'+currView+'-'+$vtor.util.trim(validateTerms[0]),rules);
 							//创建验证部件时绑定函数   
 							 $vtor.config.bind(_ido,_msgo);
 							 
