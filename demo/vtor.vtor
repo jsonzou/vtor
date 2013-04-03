@@ -57,7 +57,10 @@
 --len(6)::请输入6位字符
 --compare(=,pwd1,1)::与输入密码不一致
 --ok()::ok
-
+#idcard
+--notNull::<span style='color:red;'>*</span>必填
+--idcard::身份证号码输入有误
+--ok::ok
 /*
  验证页面模块model2
 */
