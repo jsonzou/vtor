@@ -415,24 +415,25 @@
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_region']=function(id,param){
 		  
-		   var _value= $vtor.$id(id);
+		   var _value= parseInt($vtor.$id(id));
 		   if(_value.length==0){return true;}
 
 	      if(param.lenth==0){
 			  return false;
 		  }
 		 
-		  if(!$vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^\\d+$')){
+		  if(!$vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^-?[1-9]*(\\.\\d*)?$|^-?0(\\.\\d*)?$')){
+			 
 		    return false;
 		  }
 		    
-		  if(param.length==1&&_value==param[0]){
+		  if(param.length==1&&_value==parseInt(param[0])){
 		      return true;
 		  }else if(param.length==2){
 			 
-		      return  param[0]=='~'?_value<=param[1]:
-				      param[1]=='~'?_value>=param[0]:
-				      _value>=param[0]&&_value<=param[1];
+		      return  param[0]=='~'?_value<=parseInt(param[1]):
+				      param[1]=='~'?_value>=parseInt(param[0]):
+				      _value>=parseInt(param[0])&&_value<=parseInt(param[1]);
 		  }
 		 return false;
 	   };
@@ -474,18 +475,11 @@
 	     return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'[a-zA-Z]+')
 	   };
 	  /*
-	   验证数字类型param[0]=数字位数min;param[1]=数字位数max;参数只有一个则位数为固定值;无参数则默认不限制位数
+	   验证数字类型
 	   @id=DOM vid
-	   @param=(min[,max])
 	  */
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_123']=function(id,param){
-		  if(param&&param.length==1&&/^\d+$/.test(param[0])){
-                   return  $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'\\d'+'{'+param[0]+'}') 
-		  }
-		 if(param&&param.length==2&&/^\d+$/.test(param[0])&&/^\d+$/.test(param[1])){
-                  return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'\\d{'+param[0]+','+param[1]+'}') 
-		  }
-		  return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^\\d+$') 
+		   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^-?[1-9]*(\\.\\d*)?$|^-?0(\\.\\d*)?$') 
 		};
 	/*
 	   验证字母。param[0]='a'字母开头;param[0]='1'数字开头;param[0]='_'下划线开头;无参数，默认，字母数字下划线混合
@@ -525,7 +519,7 @@
 		   return false;
 		 };
 	  $vtor.lib.funcs[$vtor.config.func_pre+'_idcard']=function(id,undefined){
-		   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^((1[1-5])|(2[1-3])|(3[1-7])|(4[1-6])|(5[0-4])|(6[1-5])|71|(8[12])|91)\d{4}((19\\d{2}(0[13-9]|1[012])(0[1-9]|[12]\d\|30))|(19\\d{2}(0[13578]|1[02])31)|(19\\d{2}02(0[1-9]|1\\d|2[0-8]))|(19([13579][26]|[2468][048]|0[48])0229))\\d{3}(\\d|X|x)?$');
+		   return $vtor.lib.funcs[$vtor.config.func_pre+'_regexp'](id,'^((1[1-5])|(2[1-3])|(3[1-7])|(4[1-6])|(5[0-4])|(6[1-5])|71|(8[12])|91)\\d{4}((19\\d{2}(0[13-9]|1[012])(0[1-9]|[12]\\d|30))|(19\\d{2}(0[13578]|1[02])31)|(19\\d{2}02(0[1-9]|1\\d|2[0-8]))|(19([13579][26]|[2468][048]|0[48])0229))\\d{3}(\\d|X|x)?$');
 	   };
 	/*
 	   验证比较param有两个参数：param[0]=['<','=','>','>=','<='];param[1]=比较的值;
