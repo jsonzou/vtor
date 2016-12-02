@@ -5,6 +5,7 @@
  * @license MIT License <https://github.com/jsonzou/vtor>
  */
 
+
 	 /*
 	   email()
 	   验证是否是email地址
